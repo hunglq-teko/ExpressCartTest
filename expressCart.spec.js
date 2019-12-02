@@ -2,7 +2,7 @@ const repeatTimes = 50;
 
 const provinces = [
 'An_Giang',
-'Bà_Rịa_-_Vũng_Tàu',
+'Bà_Rịa_Vũng_Tàu',
 'Bắc_Giang',
 'Bắc_Kạn',
 'Bạc_Liêu',
