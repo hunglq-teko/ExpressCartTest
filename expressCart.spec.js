@@ -630,7 +630,7 @@ context('Cypress for em', () => {
 
 
     for (let i=0; i<repeatTimes; i++) {
-        it('can pay for products', () => {
+        it('can register pay for products', () => {
             let productId = getRandomInt(1, 6);
             if (productId == 2) productId += 1
             cy.get(':nth-child(' + productId + ') > .thumbnail > .product_wrapper > a > .product-title').click()
@@ -638,18 +638,13 @@ context('Cypress for em', () => {
             for (let j=0; j<quantity; j++) {
                 cy.get('#container > div > div > div > div.col.s12.m6.pull-right > div > div.col.s10.productOptions > div > span:nth-child(3) > button').should('be.visible').click()
             }
-            // cy.get(':nth-child(3) > .btn').should('be.visible').click();
-            // cy.get(':nth-child(3) > .btn').click()
+
             cy.get('.btnAddToCart > .btn').should('be.visible').click()
-            // for (let j=0; j<quantity; j++) {
-            //     cy.get('.btnAddToCart > .btn').should('be.visible').click();
-            // }
-            // cy.get('.btnAddToCart > .btn').click()
+
             cy.get('.menu-btn').should('be.visible').click()
-            // cy.get('.menu-btn').click()
+
             cy.get('#cart > div > div > div:nth-child(3) > div.text-right.align-right.col.s6 > a').should('be.visible').click()
-            // #cart > div > div > div:nth-child(3) > div.text-right.align-right.col.s6 > a
-            // cy.get('#cart > :nth-child(1) > :nth-child(1) > :nth-child(3) > :nth-child(2) > a').click()
+
             cy.get('#shipEmail').type(userList[i] + '@gmail.com')
             cy.get('#shipAddr1').type(getRandomProvince())
             cy.get('#newCustomerPassword').type('12345')
@@ -660,4 +655,30 @@ context('Cypress for em', () => {
             cy.wait(2000)
         })
     }
+    
+     for (let i=0; i<repeatTimes; i++) {
+		it('can login to pay for products', () => {
+            let productId = getRandomInt(1, 6);
+            if (productId == 2) productId += 1
+            cy.get(':nth-child(' + productId + ') > .thumbnail > .product_wrapper > a > .product-title').click()
+            let quantity = getRandomInt(0, 4)
+            for (let j=0; j<quantity; j++) {
+                cy.get('#container > div > div > div > div.col.s12.m6.pull-right > div > div.col.s10.productOptions > div > span:nth-child(3) > button').should('be.visible').click()
+            }
+
+            cy.get('.btnAddToCart > .btn').should('be.visible').click()
+
+            cy.get('.menu-btn').should('be.visible').click()
+
+            cy.get('#cart > div > div > div:nth-child(3) > div.text-right.align-right.col.s6 > a').should('be.visible').click()
+            cy.get('#customerLoginEmail').type(userList[i] + '@gmail.com')
+            cy.get('#customerLoginPassword').type('12345')
+            cy.get('#customerLogin').click() 
+
+
+            cy.get('#stripeButton').should('be.visible').click()
+
+            cy.wait(2000)
+          })
+	   }
 })
